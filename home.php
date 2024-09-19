@@ -19,7 +19,7 @@
 }
 
 .navbar{
-    width: 1200px;
+    width: 1210px;
     height: 75px;
     margin: auto;
 }
