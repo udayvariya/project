@@ -1,6 +1,6 @@
 <?php
 
-include "hide.php";
+include "hide1.php";
 
 $login = false;
 $showError = false;

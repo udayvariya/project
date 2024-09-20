@@ -28,7 +28,7 @@ if (isset( $_POST['snoEdit'])){
   $result = mysqli_query($conn, $sql);
   if($result){
     $update = true;
-}
+  }
 else{
     echo "We could not update the record successfully";
 }
@@ -66,7 +66,7 @@ else{
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="dashbord.css">
+  <link rel="stylesheet" href="style/dashbord.css">
   <title>user</title>
   
 </head>

@@ -1,4 +1,7 @@
 <?php
+$showAlert = false;
+$showError = false;
+
 if($insert){
     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
     <strong>Success!</strong> Your note has been inserted successfully
@@ -25,7 +28,7 @@ if($update){
     </button>
   </div>";
   }
-
+$login ="";
 if($login){
     echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
     <strong>Success!</strong> You are logged in
@@ -35,7 +38,7 @@ if($login){
     </div> ';
     
 }
-if($showError){
+if($showError == true){
 echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Error!</strong> '. $showError.'
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -43,7 +46,7 @@ echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
         </button>
     </div> ';
 }
-if($showAlert){
+if($showAlert == true){
     echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Success!</strong> Your account is now created and you can login
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

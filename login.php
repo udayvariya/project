@@ -38,11 +38,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Webpage Design</title>
-    <!-- <link rel="stylesheet" href="style/style.css"> -->
-     <style>
-        *{
+    <!-- <link rel="stylesheet" href="style\style.css"> -->
+    <style> 
+
+       *{
     margin: 0;
     padding: 0;
 }
@@ -76,6 +77,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     float: left;
     padding-top: 10px;
     margin-top: 5px
+}
+.logo1{
+    font-size: 30px;
+    padding: 20px;
+    margin: 3px;
 }
 
 .menu{
@@ -266,15 +272,17 @@ ul li a:hover{
 .liw2 :hover{
     color: #ffffff;
 }
+i{
+    font-size: 30;
 
+}
      </style>
 </head>
 <body>
-<?php
-include "alert.php"; 
-?>
+
     <div class="main">
         <div class="navbar">
+            <!-- <i class="fa-solid fa-chevron-left"></i> -->
             <div class="icon">
                 <h2 class="logo">PHP</h2>
             </div>

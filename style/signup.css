@@ -65,10 +65,10 @@ ul li a{
 ul li a:hover{
     color: #ff7200;
 }
-
-.form{
-    width: 600px;
-    height: 450px;
+    /* }       
+    .form{
+    width: 500px;
+    height: 770px;
     background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50%);
     position: relative;
     margin-left: auto;
@@ -115,6 +115,7 @@ ul li a:hover{
 ::placeholder{
     color: #fff;
     font-family: Arial;
+    opacity: 0.5;
 }
 
 .btnn{
@@ -155,7 +156,6 @@ label{
     size: 35px;    
 }
 
-
 .par{
     padding-top: 10px;
     padding-bottom: 10px;
@@ -175,3 +175,6 @@ label{
 .par :hover{
     color: #ffffff;
 }
+.error{
+    color: #fff;
+} */

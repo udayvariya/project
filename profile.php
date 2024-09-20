@@ -29,8 +29,7 @@ include "_dbconnect.php";
     </style>
 </head>
 <body>
-<body>
-    <a href="admin_home.php">
+    <a href="dashbord.php">
         <i class="fa-solid fa-chevron-left"></i>
     </a>
     <h2> Student Details</h2>
@@ -38,7 +37,7 @@ include "_dbconnect.php";
 
 
     <table class="table" id="myTable">
-      <thead>
+      <!-- <thead>
         <tr>
           <th>S.No</th>
           <th>profile_image</th>
@@ -48,24 +47,39 @@ include "_dbconnect.php";
           <th>moblie no</th>
           <th>Action</th>
         </tr>
-      </thead>
+      </thead> -->
       <tbody>
         <?php 
-          session_start();
 
           $sql = "SELECT * FROM `data`";
           $result = mysqli_query($conn, $sql);
           while($row = mysqli_fetch_assoc($result)){
             echo "<tr>
+            <th>S.No</th>
             <td>".$row['sno']."</td>
-            <td>". $row['profile_image'] . "</td>
-            <td>". $row['firstname'] . "</td>
-            <td>". $row['lastname'] . "</td>
-            <td>". $row['email'] . "</td>
-            <td>". $row['mobileno'] . "</td>
+            </tr>
+            <tr>
+            <th>pofile image</th>
+            <td>".$row['profile_image']."</td>
+            </tr>
+            <tr>
+            <th>first name</th>
+            <td>".$row['firstname']."</td>
+            </tr>
+            <tr>
+            <th>lastname</th>
+            <td>".$row['lastname']."</td>
+            </tr>
+            <tr>
+          <th>email</th>
+            <td>".$row['email']."</td>
+            </tr>
+            <tr>
+          <th>moblie no</th>
+            <td>".$row['mobileno']."</td>
+            </tr>
+            <br><br>";
 
-            
-             </tr>";
         } 
           ?>
 
@@ -75,7 +89,5 @@ include "_dbconnect.php";
     <p><a href="forget.php">Forget Password</a></p>
   </div>
   
-</body>
-    
 </body>
 </html>
