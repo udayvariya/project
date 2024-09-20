@@ -36,24 +36,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 ?>
 
-    <?php
-    if($showAlert){
-    echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> Your account is now created and you can login
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-    </div> ';
-    }
-    if($showError){
-    echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Error!</strong> '. $showError.'
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-    </div> ';
-    }
-    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,6 +47,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
 
+<?php
+    include "alert.php";
+?>
     <div class="main">
         <div class="navbar">
             <div class="icon">

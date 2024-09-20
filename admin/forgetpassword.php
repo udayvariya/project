@@ -5,42 +5,42 @@
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    function sendmail($email,$reset_token){
+    function sendmail($reset_token){
         
-        require('phpmaier/PHPMailer.php');
-        require('phpmaier/SMTP.php');
-        require('phpmaier/Exception.php');
+        // require('phpmaier/PHPMailer.php');
+        // require('phpmaier/SMTP.php');
+        // require('phpmaier/Exception.php');
 
-        $mail = new PHPMailer(true);
+        // $mail = new PHPMailer(true);
 
-        try {
-            //Server settings
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'udayvariya302@gmail.com';                     //SMTP username
-            $mail->Password   = 'Uday@2757';                               //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        // try {
+        //     //Server settings
+        //     $mail->isSMTP();                                            //Send using SMTP
+        //     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        //     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        //     $mail->Username   = 'udayvariya302@gmail.com';                     //SMTP username
+        //     $mail->Password   = 'Uday@2757';                               //SMTP password
+        //     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        //     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         
-            //Recipients
-            $mail->setFrom('udayvariya302@gmail.com', 'UDAY PASS');
-            $mail->addAddress($email);     //Add a recipient
+        //     //Recipients
+        //     $mail->setFrom('udayvariya302@gmail.com', 'UDAY PASS');
+        //     $mail->addAddress($email);     //Add a recipient
         
             
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Password Reset Link from uday';
-            $mail->Body    = "we got request the reset password link <br>
-            click the link below : <br>
-            <a href='http://localhost/php/updatepassword.php?email=$email&reset_token=$reset_token'>Reset Password</a>";
+        //     //Content
+        //     $mail->isHTML(true);                                  //Set email format to HTML
+        //     $mail->Subject = 'Password Reset Link from uday';
+        //     $mail->Body    = "we got request the reset password link <br>
+        //     click the link below : <br>
+        //     <a href='http://localhost/php/updatepassword.php?email=$email&reset_token=$reset_token'>Reset Password</a>";
         
-            $mail->send();
-            return true;
-        }
-        catch (Exception $e) {
-            return false;
-        }
+        //     $mail->send();
+        //     return true;
+        // }
+        // catch (Exception $e) {
+        //     return false;
+        // }
 
     }
     if(isset($_POST['send-email-link'])){
@@ -53,8 +53,8 @@
             date_default_timezone_set('Asia/kolkata');
             $date=date('y-m-d');
 
-            $sql = "UPDATE `admin_data` SET `resettoken`='$reset_token',`resettokenexp`='$date' WHERE email='$_POST[email]'";
-            if(mysqli_query($conn,$sql) && sendmail($_POST['email'],$reset_token)){
+            $sql = "UPDATE `data` SET `resettoken`='$reset_token',`resettokenexp`='$date' WHERE email='$_POST[email]'";
+            if(mysqli_query($conn,$sql)){
                 echo '
                     <script>
                     alert("Resent password link send to email address");

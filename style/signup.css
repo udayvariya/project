@@ -67,8 +67,8 @@ ul li a:hover{
 }
 
 .form{
-    width: 500px;
-    height: 650px;
+    width: 600px;
+    height: 450px;
     background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50%);
     position: relative;
     margin-left: auto;

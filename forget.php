@@ -60,10 +60,10 @@
     </style>
 </head>
 <body>
-    <form action="forgetpassword.php" method="POST">
+    <form action="uday/forgetpassword.php" method="POST">
     <div class="container">
         <label>Enter your Email:</label><br>
-        <input type="email" name="email" id="" placeholder="Enter your Email"><br>
+        <input type="email" name="email" placeholder="Enter your Email"><br>
         <button name="send-email-link">Submit</button>
     </div>
     </form>

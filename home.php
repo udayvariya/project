@@ -138,7 +138,7 @@ ul li a:hover{
                     <li><a href="home.php">HOME</a></li>
                     <li><a href="signup.php">STUDENT SIGNUP</a></li>
                     <li><a href="login.php">STUDENT LOGIN</a></li>
-                    <li><a href="admin_login.php">ADMIN LOGIN</a></li>
+                    <li><a href="admin/admin_login.php">ADMIN LOGIN</a></li>
                 </ul>
             </div>
 

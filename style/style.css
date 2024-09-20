@@ -5,8 +5,7 @@
 
 .main{
     width: 100%;
-    /* background-image: url("images/bgimg.jpg"); */
-    background-color:  #e28e4a;
+    background-image: url("bgimg.jpg");
     background-position: center;
     background-size: cover;
     height: 100vh;
