@@ -1,8 +1,8 @@
 <?php
 $showAlert = false;
 $showError = false;
-$file_nameErr = $firstnameErr = $lastnameErr = $emailErr = $mobilenoErr = $passwordErr = $cpasswordErr = "";
-$firstname = $lastname = $email = $mobileno = $password = $cpassword = "";
+$file_nameErr = $firstnameErr = $lastnameErr = $emailErr = $mobilenoErr = "";
+$firstname = $lastname = $email = $mobileno = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     include '_dbconnect.php';
     if(isset($_FILES['image'])){
@@ -10,10 +10,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $file_size = $_FILES['image']['size'];
         $file_tmp = $_FILES['image']['tmp_name'];
         $file_type = $_FILES['image']['type'];
-        move_uploaded_file($file_tmp,"uday/" . $file_name);
+        move_uploaded_file($file_tmp,"/project/uday/" . $file_name);
     
         if (empty($_POST["firstname"])) {
             $firstnameErr = " * Firstname is required";
+            
           } else {
             $firstname = ($_POST["firstname"]);
             if (!preg_match("/^[a-zA-Z-' ]*$/",$firstname)) {
@@ -47,41 +48,49 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $passwordErr = "Invalid mobileno format";
                 }
           }
-
           if (empty($_POST["password"])) {
-            $passwordErr = " * password is required";
-          } else {
-            $password = ($_POST["password"]);
-                if ($password>8) {
-                    $passwordErr = "Invalid password format";
-                }
-          }
+                $password = bin2hex(random_bytes(8));
+             }
 
-          if (empty($_POST["cpassword"])) {
-            $cpasswordErr = " * cpassword is required";
-          } else {
-            $cpassword = $_POST["cpassword"];
-          }
+        //   if (empty($_POST["password"])) {
+        //     $passwordErr = " * password is required";
+        //   } else {
+        //     $password = ($_POST["password"]);
+        //         if ($password>8) {
+        //             $passwordErr = "Invalid password format";
+        //         }
+        //   }
 
-          
-        
+        //   if (empty($_POST["cpassword"])) {
+        //     $cpasswordErr = " * cpassword is required";
+        //   } else {
+        //     $cpassword = $_POST["cpassword"];
+        //   }
+             
 
         $exists=false;
-        if(($password == $cpassword) && $exists==false){
-            $sql = "INSERT INTO `data` (`sno`, `profile_image`, `firstname`, `lastname`, `email`, `mobileno`, `password`) VALUES ('', '$file_name', '$firstname', '$lastname', '$email', '$mobileno', '$password')";
+        if($email == $_POST['email']){
+            $sql = "INSERT INTO `data` (`sno`, `profile_image`, `firstname`, `lastname`, `email`, `mobileno`,`password`) VALUES ('', '$file_name', '$firstname', '$lastname', '$email', '$mobileno' , '$password')";
             $result = mysqli_query($conn, $sql);
             if ($result){
                 // echo "sucessfull";
                 $showAlert = true;
+                // sendMail($email,$reset_token);
             }
             else{
                 $showError = true;
             }
             // header("location: login.php");
-    }
-    else{
-     echo "Passwords do not match";
-    }
+        }
+        else
+        {
+        echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Error! Email Address Already Exits</strong> '. $showError.'
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+            </button>
+        </div> ';    
+        }
 }
 }
 
@@ -96,124 +105,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>SignUp</title>
-    <link rel="stylesheet" href="/project/style/signup.css">
-    <style>
-           
-.form{
-    width: 530px;
-    height: 810px;
-    background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50%);
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    transform: translate(0%,-5%);
-    border-radius: 10px;
-    padding: 25px;
-}
-
-.form h2{
-    width: 95%;
-    font-family: sans-serif;
-    text-align: center;
-    color: #ff7200;
-    font-size: 22px;
-    background-color: #fff;
-    border-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 8px;
-}
-
-.form input{
-    width: 330px;
-    height: 35px;
-    background: transparent;
-    border-bottom: 1px solid #ff7200;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    color: #fff;
-    font-size: 15px;
-    letter-spacing: 1px;
-    margin-top: 30px;
-    font-family: sans-serif;
-    margin-right: 0px;
-    padding-left: auto;
-}
-
-.form input:focus{
-    outline: none;
-}
-
-::placeholder{
-    color: #fff;
-    font-family: Arial;
-    opacity: 0.5;
-}
-
-.btnn{
-    width: 240px;
-    height: 40px;
-    background: #ff7200;
-    border: none;
-    margin-top: 30px;
-    font-size: 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    color: #fff;
-    transition: 0.4s ease;
-}
-.btnn:hover{
-    background: #fff;
-    color: #ff7200;
-}
-.btnn a{
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
-}
-.form .link{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 17px;
-    padding-top: 20px;
-    text-align: center;
-}
-.form .link a{
-    text-decoration: none;
-    color: #ff7200;
-}
-
-label{
-    color :#fff;
-    font-family: Arial, Helvetica, sans-serif;
-    size: 35px;    
-}
-
-.par{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-    text-decoration: none;
-    color: #ff7200;
-    font-size: 20px;
+    <link rel="stylesheet" href="/project/style/signup_user.css">
     
-}
-.par a{
-
-    text-decoration: none;
-    color: #ff7200;
-
-    
-}
-.par :hover{
-    color: #ffffff;
-}
-.error{
-    color: #f00202;
-}
-
-    </style>
 </head>
 <body>
 <?php
@@ -241,11 +136,16 @@ if($showError){
     <div class="main">
         <div class="navbar">
             <div class="icon">
+            <!-- <div class="back">
+            <a href="admin_home.php">
+                <i class="fa-solid fa-chevron-left"></i>
+            </a> -->
+        <!-- </div>          -->
                 <h2 class="logo">PHP</h2>
-            </div>         
+        </div>
         </div> 
                  <div class="form">
-                    <form action="signup.php" method="post" enctype="multipart/form-data">
+                    <form action="/project/admin/signup_user.php" method="post" enctype="multipart/form-data">
                         <h2>Signup Here</h2>
                         <label>Select image:</label>
                         <input type="file" name="image" id=""><br>
@@ -257,12 +157,11 @@ if($showError){
                         <input type="text" name="email" placeholder="Enter email Here"><br><span class="error"><?php echo $emailErr;?></span><br>
                         <label>Mobile NO:</label>
                         <input type="text" name="mobileno" placeholder="Enter mobileno Here"><br><span class="error"><?php echo $mobilenoErr;?></span><br>
-                        <label>Password:</label>
+                        <!-- <label>Password:</label>
                         <input type="password" name="password" placeholder="Enter Password Here"><br><span class="error"><?php echo $passwordErr;?></span><br>
                         <label>CPassword:</label>
-                        <input type="password" name="cpassword" placeholder="Enter Confirm Password Here"><br><span class="error"><?php echo $cpasswordErr;?></span><br>
+                        <input type="password" name="cpassword" placeholder="Enter Confirm Password Here"><br><span class="error"><?php echo $cpasswordErr;?></span><br> -->
                         <button class="btnn">Signup</button>
-                        <p class="par">if you are already <a href="login.php">login</a></p>
                     </form>
                </div>
     </div>

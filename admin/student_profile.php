@@ -6,27 +6,32 @@ session_start();
         header("location: admin_login.php");
 
         }
-
+        
 include "_dbconnect.php";
 
-
+if(isset($_GET['delete'])){
+  $sno = $_GET['delete'];
+  $delete = true;
+  $sql = "DELETE FROM `data` WHERE `sno` = $sno";
+  $result = mysqli_query($conn, $sql);
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    if (isset( $_POST['snoEdit'])){
-        $sno = $_POST["snoEdit"];   
-        $profile_image = $_POST["profile_image"];
-        $firstname = $_POST["firstname"];
-        $lastname = $_POST["lastname"];
-        $email = $_POST["email"];
-        $mobileno = $_POST["mobileno"];
-      $sql = "UPDATE `admin_data` SET `profile_image` = '$profile_image' ,`firstname` = '$firstname', `lastname` = '$lastname', `email` = '$email', `mobileno` ='$mobileno' WHERE `admin_data`.`sno` = $sno";
-      $result = mysqli_query($conn, $sql);
-      if($result){
-        $update = true;
-      }
-    else{
-        echo "We could not update the record successfully";
-    }
-    }
+if (isset( $_POST['snoEdit'])){
+    $sno = $_POST["snoEdit"];   
+    $profile_image = $_POST["profile_image"];
+    $firstname = $_POST["firstname"];
+    $lastname = $_POST["lastname"];
+    $email = $_POST["email"];
+    $mobileno = $_POST["mobileno"];
+  $sql = "UPDATE `data` SET `profile_image` = '$profile_image' ,`firstname` = '$firstname', `lastname` = '$lastname', `email` = '$email', `mobileno` ='$mobileno' WHERE `data`.`sno` = $sno";
+  $result = mysqli_query($conn, $sql);
+  if($result){
+    $update = true;
+  }
+else{
+    echo "We could not update the record successfully";
+}
+}
 }
 ?>
 
@@ -49,9 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- sweet alert  -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>Document</title>
-    <link rel="stylesheet" href="/project/style/admin_profile.css">
+    <link rel="stylesheet" href="/project/style/profile.css">
 </head>
 <body>
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
@@ -64,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <form action="admin_profile.php" method="POST">
+        <form action="profile.php" method="POST">
           <div class="modal-body">
             <input type="hidden" name="snoEdit" id="snoEdit">
             <div class="form-group">
@@ -100,50 +107,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <a href="admin_home.php">
         <i class="fa-solid fa-chevron-left"></i>
     </a>
-    <h2> Your Details</h2>
+    <h2> Student Details</h2>
     <div class="container my-4">
 
 
     <table class="table" id="myTable">
-      
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>profile_image</th>
+          <th>first name</th>
+          <th>lastname</th>
+          <th>email</th>
+          <th>moblie no</th>
+          <th>Action</th>
+        </tr>
+      </thead>
       <tbody>
         <?php 
+          // session_start();
 
-          $sql = "SELECT * FROM `admin_data`";
+          $sql = "SELECT * FROM `data`";
           $result = mysqli_query($conn, $sql);
           while($row = mysqli_fetch_assoc($result)){
-            echo "
-            <tr>
-            <th>pofile image</th>
-            <td>".$row['profile_image']."</td>
-            </tr>
-            <tr>
-            <th>first name</th>
-            <td>".$row['firstname']."</td>
-            </tr>
-            <tr>
-            <th>lastname</th>
-            <td>".$row['lastname']."</td>
-            </tr>
-            <tr>
-            <th>email</th>
-            <td>".$row['email']."</td>
-            </tr>
-            <tr>
-            <th>moblie no</th>
-            <td>".$row['mobileno']."</td>
-            </tr>
-            <tr>        
-            <th><td> <button class='edit btn btn-md btn-primary' id=".$row['sno'].">Edit</button></th> 
-            </tr>
-            <br><br>";
+            echo "<tr>
+            <td>".$row['sno']."</td>
+            <td>". $row['profile_image'] . "</td>
+            <td>". $row['firstname'] . "</td>
+            <td>". $row['lastname'] . "</td>
+            <td>". $row['email'] . "</td>
+            <td>". $row['mobileno'] . "</td>
 
+            <td> <button class='edit btn btn-sm btn-primary' id=".$row['sno'].">Edit</button> <button class='delete btn btn-sm btn-primary' id=d".$row['sno'].">Delete</button>  </td>
+
+            
+             </tr>";
         } 
           ?>
 
 
       </tbody>
-      
     </table>
     <p><a href="forget.php">Forget Password</a></p>
   </div>
@@ -170,7 +173,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       });
     });
 
-    
+    deletes = document.getElementsByClassName('delete');
+    Array.from(deletes).forEach((element) => {
+      element.addEventListener("click", (e) => {
+        console.log("edit ");
+        sno = e.target.id.substr(1);
+
+        if (confirm("Are you sure you want to delete this record!")) {
+          console.log("yes");
+          window.location = `student_profile.php?delete=${sno}`;
+        }
+        else {
+          console.log("no");
+        }
+      //   Swal.fire({
+      //   title: "Are you sure you want to delete this record!",
+      //   showDenyButton: true,
+      //   showCancelButton: true,
+      //   confirmButtonText: "Delete",
+      //   denyButtonText: `Don't Delete`
+      //   }).then((result) => {
+      //   /* Read more about isConfirmed, isDenied below */
+      //   if (result.isConfirmed) {
+      //   Swal.fire("Delete!", "", "success");
+      //   } else if (result.isDenied) {
+      //       Swal.fire("Not deleted", "", "info");
+      //   }
+      // });
+      })
+    })
   </script>
 </body>
+    
 </html>

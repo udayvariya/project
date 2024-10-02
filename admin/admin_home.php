@@ -18,8 +18,8 @@
                     <li><a href="admin_home.php">HOME</a></li>
                     <li><a href="signup_user.php">NEW USER SIGNUP</a></li>
                     <li><a href="admin_dashbord.php">DASHBORD</a></li>
-                    <li><a href="admin_profile.php">Profile Update</a></li>
-                    <li><a href="profile.php">Student Details</a></li>
+                    <li><a href="admin_profile.php">Profile </a></li>
+                    <li><a href="student_profile.php">Student Details</a></li>
                     <li><a href="admin_logout.php">LOGOUT</a></li>
 
 

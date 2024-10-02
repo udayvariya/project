@@ -1,7 +1,24 @@
-           
-.form{
+.main{
+    background-color: #e28e4a;
+}  
+
+.icon{
+    margin-top: 50px;
+    margin-left: 70px;
+    display: flex;
+    padding-right: 10px;
+    padding-bottom: 20px;
+}
+.back i{
+    text-decoration: none;
+    color: #000;
+    height: 30px;
+    width: 30px;
+    margin-top: 20px;
+}
+.form{  
     width: 530px;
-    height: 810px;
+    height: 650px;
     background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50%);
     position: relative;
     margin-left: auto;

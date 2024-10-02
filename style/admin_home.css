@@ -32,12 +32,13 @@
 
 .menu{
     width: 400px;
-    float: left;
+    float: right;
     height: 20px;
+    margin-left: 70px;
 }
 
 ul{
-    float: left;
+    float: right;
     display: flex;
     justify-content: center;
     align-items: center;
