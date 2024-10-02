@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $lastnameErr = " * Lastname is required";
           } else {
             $lastname = ($_POST["lastname"]);
-            if (!preg_match("/^[a-zA-Z-' ]*$/",$lasttname)) {
+            if (!preg_match("/^[a-zA-Z-' ]*$/",$lastname)) {
                 $lastnameErr = "Only letters and white space allowed";
               }
           }
@@ -42,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           if (empty($_POST["mobileno"])) {
             $mobilenoErr = " * mobileno is required";
           } else {
-            $mobileno = ($_POST["moblieno"]);
+            $mobileno = ($_POST['mobileno']);
                 if ($mobileno>10) {
                     $passwordErr = "Invalid mobileno format";
                 }
