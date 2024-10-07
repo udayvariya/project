@@ -25,7 +25,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $lastnameErr = " * Lastname is required";
           } else {
             $lastname = ($_POST["lastname"]);
+<<<<<<< HEAD
             if (!preg_match("/^[a-zA-Z-' ]*$/",$lastname)) {
+=======
+            if (!preg_match("/^[a-zA-Z-' ]*$/",$lasttname)) {
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
                 $lastnameErr = "Only letters and white space allowed";
               }
           }
@@ -42,7 +46,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           if (empty($_POST["mobileno"])) {
             $mobilenoErr = " * mobileno is required";
           } else {
+<<<<<<< HEAD
             $mobileno = ($_POST['mobileno']);
+=======
+            $mobileno = ($_POST["moblieno"]);
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
                 if ($mobileno>10) {
                     $passwordErr = "Invalid mobileno format";
                 }
@@ -97,7 +105,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <title>SignUp</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="/project/style/signup.css">
+=======
+    <link rel="stylesheet" href="style/signup.css">
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
     <style>
            
 .form{
@@ -218,6 +230,7 @@ label{
 <body>
 <?php
 
+<<<<<<< HEAD
 if($showError){
     echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Error!</strong> '. $showError.'
@@ -236,6 +249,26 @@ if($showError){
     }
 
 // include "alert.php";
+=======
+// if($showError){
+//     echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
+//         <strong>Error!</strong> '. $showError.'
+//         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+//         <span aria-hidden="true">×</span>
+//             </button>
+//         </div> ';
+//     }
+//     if($showAlert){
+//         echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
+//             <strong>Success!</strong> Your account is now created and you can login
+//             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+//             <span aria-hidden="true">×</span>
+//             </button>
+//             </div> ';
+//     }
+
+include "alert.php";
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 
 ?> 
     <div class="main">

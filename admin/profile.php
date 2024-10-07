@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 
 
 session_start();
@@ -33,6 +34,9 @@ else{
 }
 }
 }
+=======
+include "_dbconnect.php";
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +46,7 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<<<<<<< HEAD
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -101,6 +106,29 @@ else{
     </div>
   </div>
 
+=======
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+    <style>
+        i{
+            height: 100px;
+            width: 100px;
+            align-items: center;
+            justify-content: center;
+            padding : 50px 50px;
+            text-decoration: none;
+            color: black;
+        
+        }
+        h2{
+            margin-left: 500px;
+        }
+    </style>
+</head>
+<body>
+<body>
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
     <a href="admin_home.php">
         <i class="fa-solid fa-chevron-left"></i>
     </a>
@@ -122,7 +150,11 @@ else{
       </thead>
       <tbody>
         <?php 
+<<<<<<< HEAD
           // session_start();
+=======
+          session_start();
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 
           $sql = "SELECT * FROM `data`";
           $result = mysqli_query($conn, $sql);
@@ -135,8 +167,11 @@ else{
             <td>". $row['email'] . "</td>
             <td>". $row['mobileno'] . "</td>
 
+<<<<<<< HEAD
             <td> <button class='edit btn btn-sm btn-primary' id=".$row['sno'].">Edit</button> <button class='delete btn btn-sm btn-primary' id=d".$row['sno'].">Delete</button>  </td>
 
+=======
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
             
              </tr>";
         } 
@@ -147,6 +182,7 @@ else{
     </table>
     <p><a href="forget.php">Forget Password</a></p>
   </div>
+<<<<<<< HEAD
   <script>
     edits = document.getElementsByClassName('edit');
     Array.from(edits).forEach((element) => {
@@ -188,4 +224,10 @@ else{
   </script>
 </body>
     
+=======
+  
+</body>
+    
+</body>
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 </html>

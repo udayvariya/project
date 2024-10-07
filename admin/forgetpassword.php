@@ -5,12 +5,20 @@
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
+<<<<<<< HEAD
     function sendMail($email,$reset_token){
         echo $email;
         echo $reset_token;
         // require('/project/phpmaier/PHPMailer.php');
         // require('/project/phpmaier/SMTP.php');
         // require('/project/phpmaier/Exception.php');
+=======
+    function sendmail($reset_token){
+        
+        // require('phpmaier/PHPMailer.php');
+        // require('phpmaier/SMTP.php');
+        // require('phpmaier/Exception.php');
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 
         // $mail = new PHPMailer(true);
 
@@ -50,6 +58,7 @@
     if($result){
         if(mysqli_num_rows($result) == 1){
             
+<<<<<<< HEAD
             $reset_token = bin2hex(random_bytes(16));
             date_default_timezone_set('Asia/kolkata');
             $date=date('y-m-d');
@@ -71,6 +80,26 @@
                 //     alert("server dwon try again leter");
                 //     </script>
                 // ';
+=======
+            $reset_token = "123456abcd";
+            date_default_timezone_set('Asia/kolkata');
+            $date=date('y-m-d');
+
+            $sql = "UPDATE `data` SET `resettoken`='$reset_token',`resettokenexp`='$date' WHERE email='$_POST[email]'";
+            if(mysqli_query($conn,$sql)){
+                echo '
+                    <script>
+                    alert("Resent password link send to email address");
+                    </script>
+                ';
+            }
+            else{
+                echo '
+                    <script>
+                    alert("server dwon try again leter");
+                    </script>
+                ';
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
             }
 
         }
@@ -91,4 +120,8 @@
         ';
     }
     }
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb

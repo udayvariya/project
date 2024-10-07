@@ -1,5 +1,9 @@
 body {
+<<<<<<< HEAD
     background-color:#e28e4a;  
+=======
+    background-color:skyblue;  
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 }
 .navbar{
     width: 1200px;

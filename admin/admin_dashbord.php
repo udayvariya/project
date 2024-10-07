@@ -4,14 +4,21 @@
 session_start();
         if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] == false){
         header("location: admin_login.php");
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
         }
 $insert = false;
 $update = false;
 $delete = false;
+<<<<<<< HEAD
 $login  = false;
 $showAlert = false;
 $showError = false;
+=======
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 
 include '_dbconnect.php';
 
@@ -53,7 +60,11 @@ else{
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<<<<<<< HEAD
   <link rel="stylesheet" href="/project/style/dashbord.css">
+=======
+  <link rel="stylesheet" href="dashbord.css">
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
   <title>user</title>
   
 </head>
@@ -115,6 +126,7 @@ else{
     </div>
   </div>
 <?php
+<<<<<<< HEAD
 // include "alert.php";
 
 if($login){
@@ -142,6 +154,9 @@ if($showAlert){
       </button>
       </div> ';
 }
+=======
+include "alert.php";
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 ?>
   <div class="container my-4">
 

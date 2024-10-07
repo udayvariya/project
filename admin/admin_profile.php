@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 
@@ -30,11 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 ?>
 
+=======
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -172,5 +176,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     
   </script>
+=======
+    <title>Document</title>
+</head>
+<body>
+    <h1>your profile</h1>
+>>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 </body>
 </html>
