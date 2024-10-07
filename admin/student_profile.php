@@ -57,7 +57,7 @@ else{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- sweet alert  -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <title>Document</title>
+    <title>ADMIN</title>
     <link rel="stylesheet" href="/project/style/profile.css">
 </head>
 <body>
@@ -132,7 +132,11 @@ else{
           while($row = mysqli_fetch_assoc($result)){
             echo "<tr>
             <td>".$row['sno']."</td>
-            <td>". $row['profile_image'] . "</td>
+            <td>";
+            if($row['profile_image']) {
+              echo "<img height='100px' width='130px' src='/project/images/" . htmlspecialchars($row['profile_image']) . "' alt='Image' class='rounded' style='max-width: 100%; cursor: pointer;'>";
+            }
+            echo "</td>
             <td>". $row['firstname'] . "</td>
             <td>". $row['lastname'] . "</td>
             <td>". $row['email'] . "</td>
@@ -148,7 +152,7 @@ else{
 
       </tbody>
     </table>
-    <p><a href="forget.php">Forget Password</a></p>
+    <!-- <p><a href="forget.php">Forget Password</a></p> -->
   </div>
   <script>
     edits = document.getElementsByClassName('edit');

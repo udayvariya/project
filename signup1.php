@@ -1,13 +1,9 @@
 <?php
-
-session_start();
-        if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] == false){
-        header("location: admin_login.php");
-        }
+include "hide.php";
 $showAlert = false;
 $showError = false;
-$file_nameErr = $firstnameErr = $lastnameErr = $emailErr = $mobilenoErr = "";
-$firstname = $lastname = $email = $mobileno = "";
+$file_nameErr = $firstnameErr = $lastnameErr = $emailErr = $mobilenoErr = $passwordErr = $cpasswordErr = "";
+$firstname = $lastname = $email = $mobileno = $password = $cpassword = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     include '_dbconnect.php';
     if(isset($_FILES['image'])){
@@ -15,11 +11,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $file_size = $_FILES['image']['size'];
         $file_tmp = $_FILES['image']['tmp_name'];
         $file_type = $_FILES['image']['type'];
-        move_uploaded_file($file_tmp,"/project/uday/" . $file_name);
+        move_uploaded_file($file_tmp,"images/" . $file_name);
     
         if (empty($_POST["firstname"])) {
             $firstnameErr = " * Firstname is required";
-            
           } else {
             $firstname = ($_POST["firstname"]);
             if (!preg_match("/^[a-zA-Z-' ]*$/",$firstname)) {
@@ -53,53 +48,63 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $passwordErr = "Invalid mobileno format";
                 }
           }
+
           if (empty($_POST["password"])) {
-                $pass = "12345678";
-                $password = password_hash($pass,PASSWORD_DEFAULT);
-             }
+            $passwordErr = " * password is required";
+          } else {
+            $password = ($_POST["password"]);
+                if ($password>8) {
+                    $passwordErr = "Invalid password format";
+                }
+          }
+
+          if (empty($_POST["cpassword"])) {
+            $cpasswordErr = " * cpassword is required";
+          } else {
+            $cpassword = $_POST["cpassword"];
+          }
+
+          
+        
+
         $exists=false;
         $sql = "SELECT * FROM `data` WHERE email = '$_POST[email]'";
         $result = mysqli_query($conn,$sql);
         if($result){
             if(mysqli_num_rows($result) == 0){
 
-            $sql = "INSERT INTO `data` (`sno`, `profile_image`, `firstname`, `lastname`, `email`, `mobileno`,`password`) VALUES ('', '$file_name', '$firstname', '$lastname', '$email', '$mobileno' , '$password')";
-            $result = mysqli_query($conn, $sql);
-            if ($result){
-                // echo "sucessfull";
-                $showAlert = true;
-                // sendMail($email,$reset_token);
+                if(($password == $cpassword) && $exists==false){
+                $sql = "INSERT INTO `data` (`sno`, `profile_image`, `firstname`, `lastname`, `email`, `mobileno`, `password`) VALUES ('', '$file_name', '$firstname', '$lastname', '$email', '$mobileno', '$password')";
+                $result = mysqli_query($conn, $sql);
+                if ($result){
+                    // echo "sucessfull";
+                    $showAlert = true;
+                }
+                else{
+                    $showError = true;
+                }
+                // header("location: login.php");
+                }
+                else{
+                     echo "Passwords do not match";
+                }
             }
             else{
-                $showError = true;
+                echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error! Email Is already Exits.</strong> '. $showError.'
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    </button>
+                    </div> ';
+    
             }
-            // header("location: login.php");
-        }
-        else{
-            // $showError = true;
-            echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Error! Email Address Already Exits</strong> '. $showError.'
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">×</span>
-            </button>
-        </div> '; 
-
         }
     }
-        else
-        {
-        echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Error! Email Address Already Exits</strong> '. $showError.'
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">×</span>
-            </button>
-        </div> ';    
-        }
-}
 }
 
     
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -109,47 +114,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>ADMIN</title>
-    <link rel="stylesheet" href="/project/style/signup_user.css">
-    
-</head>
+    <link rel="stylesheet" href="/project/style/signup1.css">
+    <title>SignUp</title>
+
+  </head>
 <body>
 <?php
 
-if($showError){
-    echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Error!</strong> '. $showError.'
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">×</span>
-            </button>
-        </div> ';
-    }
-    if($showAlert){
-        echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success!</strong> Your account is now created and you can login
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-            </div> ';
-    }
-
-// include "alert.php";
+include "alert.php";
 
 ?> 
     <div class="main">
         <div class="navbar">
             <div class="icon">
-            <!-- <div class="back">
-            <a href="admin_home.php">
-                <i class="fa-solid fa-chevron-left"></i>
-            </a> -->
-        <!-- </div>          -->
                 <h2 class="logo">PHP</h2>
-        </div>
+            </div>         
         </div> 
                  <div class="form">
-                    <form action="/project/admin/signup_user.php" method="post" enctype="multipart/form-data">
+                    <form action="signup1.php" method="post" enctype="multipart/form-data">
                         <h2>Signup Here</h2>
                         <label>Select image:</label>
                         <input type="file" name="image" id=""><br>
@@ -161,11 +143,12 @@ if($showError){
                         <input type="text" name="email" placeholder="Enter email Here"><br><span class="error"><?php echo $emailErr;?></span><br>
                         <label>Mobile NO:</label>
                         <input type="text" name="mobileno" placeholder="Enter mobileno Here"><br><span class="error"><?php echo $mobilenoErr;?></span><br>
-                        <!-- <label>Password:</label>
+                        <label>Password:</label>
                         <input type="password" name="password" placeholder="Enter Password Here"><br><span class="error"><?php echo $passwordErr;?></span><br>
                         <label>CPassword:</label>
-                        <input type="password" name="cpassword" placeholder="Enter Confirm Password Here"><br><span class="error"><?php echo $cpasswordErr;?></span><br> -->
+                        <input type="password" name="cpassword" placeholder="Enter Confirm Password Here"><br><span class="error"><?php echo $cpasswordErr;?></span><br>
                         <button class="btnn">Signup</button>
+                        <p class="par">if you are already <a href="login.php">login</a></p>
                     </form>
                </div>
     </div>

@@ -39,7 +39,6 @@ else{
     $lineno = $_POST["lineno"];
     $query = $_POST["query"];
 
-
   $sql = "INSERT INTO `query` (`sno`, `date`, `pagename`, `lineno`, `query`) VALUES ('', '$date', '$pagename', '$lineno', '$query')";
   $result = mysqli_query($conn, $sql);
 
@@ -66,11 +65,18 @@ else{
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-<<<<<<< HEAD
-  <link rel="stylesheet" href="project/style/dashbord.css">
-=======
-  <link rel="stylesheet" href="style/dashbord.css">
->>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="/project/style/dashbord.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.0/sweetalert2.min.js" integrity="sha512-OlF0YFB8FRtvtNaGojDXbPT7LgcsSB3hj0IZKaVjzFix+BReDmTWhntaXBup8qwwoHrTHvwTxhLeoUqrYY9SEw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <title>user</title>
   
 </head>
@@ -84,7 +90,7 @@ else{
 
             <div class="menu">
                 <ul>
-                    <li><a href="logout.php">logout</a></li>
+                    <li><a href="/project/logout.php">logout</a></li>
                     <li><a href="profile.php">Profile Update</a></li>
                 </ul>
             </div>
@@ -106,19 +112,19 @@ else{
           <div class="modal-body">
             <input type="hidden" name="snoEdit" id="snoEdit">
             <div class="form-group">
-              <label>date</label>
+              <label>Date</label>
               <input type="date" class="form-control" id="date" name="date">
             </div>
             <div class="form-group">
-              <label>pagename</label>
+              <label>Pagename</label>
               <input type="text" class="form-control" id="pagename" name="pagename">
             </div>
             <div class="form-group">
-              <label>lineno</label>
+              <label>Lineno</label>
               <input type="text" class="form-control" id="lineno" name="lineno">
             </div>
             <div class="form-group">
-              <label>query</label>
+              <label>Query</label>
               <textarea id="query" class="form-control" name="query" rows="3"></textarea>
             </div> 
           </div>
@@ -138,29 +144,31 @@ include "alert.php";
     <h2>Add a Note to Query</h2>
     <form action="dashbord.php" method="POST">
       <div class="form-group">
-        <label>date</label>
+        <label>Date</label>
         <input type="date" class="form-control" id="date" name="date">
       </div>
       <div class="form-group">
-        <label>pagename</label>
+        <label>Pagename</label>
         <input type="text" class="form-control" name="pagename">
       </div>
       <div class="form-group">
-        <label>lineno</label>
+        <label>Lineno</label>
         <input type="text" class="form-control" name="lineno">
       </div>
       <div class="form-group">
-        <label>query</label>
+        <label>Query</label>
         <textarea class="form-control" name="query" rows="3"></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Add Note</button>
     </form>
   </div>
-
+  <div class="search">
+  <label><b>  Search Date : </b></label>
+    <input id="myInput" type="text" placeholder="Search..">
+  </div>
   <div class="container my-4">
 
-
-    <table class="table" id="myTable">
+    <table class="table" >
       <thead>
         <tr>
           <th>S.No</th>
@@ -168,10 +176,11 @@ include "alert.php";
           <th>pagename</th>
           <th>lineno</th>
           <th>query</th>
+          <th> admin comment</th>
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="myTable">
         <?php 
           $sql = "SELECT * FROM `query`";
           $result = mysqli_query($conn, $sql);
@@ -184,6 +193,7 @@ include "alert.php";
             <td>". $row['pagename'] . "</td>
             <td>". $row['lineno'] . "</td>
             <td>". $row['query'] . "</td>
+            <td>". $row['comment'] . "</td>
 
             <td> <button class='edit btn btn-sm btn-primary' id=".$row['sno'].">Edit</button> <button class='delete btn btn-sm btn-primary' id=d".$row['sno'].">Delete</button>  </td>
           </tr>";
@@ -195,26 +205,19 @@ include "alert.php";
     </table>
   </div>
   <hr>
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
-  <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-  <!-- <script>
-    $(document).ready(function () {
-      $('#myTable').DataTable();
-
-    });
-  </script> -->
   <script>
-    edits = document.getElementsByClassName('edit');
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+
+  <script>
+      edits = document.getElementsByClassName('edit');
     Array.from(edits).forEach((element) => {
       element.addEventListener("click", (e) => {
         console.log("edit ");
@@ -234,19 +237,34 @@ include "alert.php";
       })
     })
 
+
     deletes = document.getElementsByClassName('delete');
     Array.from(deletes).forEach((element) => {
       element.addEventListener("click", (e) => {
         console.log("edit ");
         sno = e.target.id.substr(1);
 
-        if (confirm("Are you sure you want to delete this note!")) {
-          console.log("yes");
-          window.location = `contect.php?delete=${sno}`;
-        }
-        else {
-          console.log("no");
-        }
+        // if (confirm("Are you sure you want to delete this note!")) {
+        //   console.log("yes");
+        // }
+        // else {
+          //   console.log("no");
+          // }
+          Swal.fire({
+            title: "Do you want to Delete?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+            denyButtonText: `can't Delete `
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              Swal.fire("Delete!", "", "success");
+              window.location = `dashbord.php?delete=${sno}`;
+        } else if (result.isDenied) {
+        Swal.fire("Can Not Deleted!", "", "info");
+      }
+      });
       })
     })
   </script>

@@ -1,15 +1,22 @@
 <?php
-    include "_dbconnect.php";
 
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\SMTP;
-    use PHPMailer\PHPMailer\Exception;
+session_start();
+        if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] == false){
+        header("location: /poject/admin/admin_login.php");
+        }
 
-    function sendmail($email){
+        include "_dbconnect.php";
+
+        use PHPMailer\PHPMailer\PHPMailer;
+        // use PHPMailer\PHPMailer\SMTP;
+        use PHPMailer\PHPMailer\Exception;
+
+    function sendmail($email,$reset_token){
         echo $email;
-        // require('phpmaier/PHPMailer.php');
-        // require('phpmaier/SMTP.php');
-        // require('phpmaier/Exception.php');
+        echo $reset_token;
+        // require('/project/phpmaier/PHPMailer.php');
+        // require('/project/phpmaier/SMTP.php');
+        // require('/project/phpmaier/Exception.php');
 
         // $mail = new PHPMailer(true);
 
@@ -47,36 +54,36 @@
     $sql = "SELECT * FROM `data` WHERE email = '$_POST[email]'";
     $result = mysqli_query($conn,$sql);
     if($result){
-        // if(mysqli_num_rows($result) == 1){
+        if(mysqli_num_rows($result) == 1){
             
-        //     $reset_token = "123456abcd";
-        //     date_default_timezone_set('Asia/kolkata');
-        //     $date=date('y-m-d');
+            $reset_token = "123456abcd";
+            date_default_timezone_set('Asia/kolkata');
+            $date=date('y-m-d');
 
-        //     $sql = "UPDATE `data` SET `resettoken`='$reset_token',`resettokenexp`='$date' WHERE email='$_POST[email]'";
-        //     if(mysqli_query($conn,$sql)){
-        //         echo '
-        //             <script>
-        //             alert("Resent password link send to email address");
-        //             </script>
-        //         ';
-        //     }
-        //     else{
-        //         echo '
-        //             <script>
-        //             alert("server dwon try again leter");
-        //             </script>
-        //         ';
-        //     }
+            $sql = "UPDATE `data` SET `resettoken`='$reset_token',`resettokenexp`='$date' WHERE email='$_POST[email]'";
+            if(mysqli_query($conn,$sql)  && sendMail($_POST['email'],$reset_token)){
+                echo '
+                    <script>
+                    alert("Resent password link send to email address");
+                    </script>
+                ';
+            }
+            else{
+                echo '
+                    <script>
+                    alert("server dwon try again leter");
+                    </script>
+                ';
+            }
 
-        // }
-        // else{
-        //     echo '
-        //     <script>
-        //     alert("email not found");
-        //     </script>
-        // ';
-        // }
+        }
+        else{
+            echo '
+            <script>
+            alert("email not found");
+            </script>
+        ';
+        }
 
     }
     else{

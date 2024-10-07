@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 
 
@@ -31,14 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 ?>
 
-=======
->>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -54,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
       
-    <title>Document</title>
+    <title>ADMIN</title>
     <link rel="stylesheet" href="/project/style/admin_profile.css">
 </head>
 <body>
@@ -118,8 +114,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
           while($row = mysqli_fetch_assoc($result)){
             echo "
             <tr>
-            <th>pofile image</th>
-            <td>".$row['profile_image']."</td>
+            <th>Profile Image</th>
+            <td>";
+            if($row['profile_image']) {
+              echo "<img height='130px' width='160px' src='/project/images/" . htmlspecialchars($row['profile_image']) . "' alt='Image' class='rounded' style='max-width: 100%; cursor: pointer;'>";
+            }
+            echo "</td>
             </tr>
             <tr>
             <th>first name</th>
@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       </tbody>
       
     </table>
-    <p><a href="forget.php">Forget Password</a></p>
+    <p class="liw2"><a href="/project/admin/admin_forget.php">Forget Password</a></p>
   </div>
   <script>
     edits = document.getElementsByClassName('edit');
@@ -176,11 +176,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     
   </script>
-=======
-    <title>Document</title>
-</head>
-<body>
-    <h1>your profile</h1>
->>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 </body>
 </html>

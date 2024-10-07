@@ -1,19 +1,4 @@
-<?php
-
-session_start();
-        if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] == false){
-        header("location: login.php");
-        }
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password</title>
-    <!-- <link rel="stylesheet" href="/project/style/forget.php"> -->
-     <style>
-        .container{
+.container{
     height: 150px;
     width: 300px;
     border: 2px solid black;
@@ -65,15 +50,3 @@ button{
     transition: 0.4s ease;
     
 }
-     </style>
-</head>
-<body>
-    <form action="/project/forgetpassword.php" method="POST">
-    <div class="container">
-        <label>Enter your Email:</label><br>
-        <input type="email" name="email" placeholder="Enter your Email"><br>
-        <button name="send-email-link">Submit</button>
-    </div>
-    </form>
-</body>
-</html>

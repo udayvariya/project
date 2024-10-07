@@ -1,7 +1,7 @@
 <?php
 $showAlert = false;
 $showError = false;
-
+$insert = false;
 if($insert){
     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
     <strong>Success!</strong> Your note has been inserted successfully
@@ -10,7 +10,7 @@ if($insert){
     </button>
   </div>";
   }
-
+$delete = false;
 if($delete){
     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
     <strong>Success!</strong> Your note has been deleted successfully
@@ -19,7 +19,7 @@ if($delete){
     </button>
   </div>";
   }
-
+$update = false;
 if($update){
     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
     <strong>Success!</strong> Your note has been updated successfully

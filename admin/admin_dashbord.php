@@ -4,21 +4,14 @@
 session_start();
         if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] == false){
         header("location: admin_login.php");
-<<<<<<< HEAD
 
-=======
-      
->>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
         }
 $insert = false;
 $update = false;
 $delete = false;
-<<<<<<< HEAD
 $login  = false;
 $showAlert = false;
 $showError = false;
-=======
->>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 
 include '_dbconnect.php';
 
@@ -35,7 +28,8 @@ if (isset( $_POST['snoEdit'])){
     $pagename = $_POST["pagename"];
     $lineno = $_POST["lineno"];
     $query = $_POST["query"];
-  $sql = "UPDATE `query` SET `date` = '$date' , `pagename` = '$pagename' , `lineno` = '$lineno' ,`query` = '$query' WHERE `query`.`sno` = $sno";
+    $comment = $_POST["comment"];
+  $sql = "UPDATE `query` SET `date` = '$date' , `pagename` = '$pagename' , `lineno` = '$lineno' ,`query` = '$query' ,`comment` = '$comment' WHERE `query`.`sno` = $sno";
   $result = mysqli_query($conn, $sql);
   if($result){
     $update = true;
@@ -60,12 +54,8 @@ else{
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-<<<<<<< HEAD
-  <link rel="stylesheet" href="/project/style/dashbord.css">
-=======
-  <link rel="stylesheet" href="dashbord.css">
->>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
-  <title>user</title>
+  <link rel="stylesheet" href="/project/style/admin_dashbord.css">
+  <title>ADMIN</title>
   
 </head>
 
@@ -97,7 +87,7 @@ else{
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <form action="dashbord.php" method="POST">
+        <form action="/project/admin/admin_dashbord.php" method="POST">
           <div class="modal-body">
             <input type="hidden" name="snoEdit" id="snoEdit">
             <div class="form-group">
@@ -116,9 +106,13 @@ else{
               <label>query</label>
               <textarea id="query" class="form-control" name="query" rows="3"></textarea>
             </div> 
+            <div class="form-group">
+              <label>comment</label>
+              <textarea id="comment" class="form-control" name="comment" rows="5"></textarea>
+            </div> 
           </div>
           <div class="modal-footer d-block mr-auto">
-            <button type="button" class="btn btn-secondary">Close</button>
+            <!-- <button type="button" class="btn btn-secondary">Close</button> -->
             <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
         </form>
@@ -126,7 +120,6 @@ else{
     </div>
   </div>
 <?php
-<<<<<<< HEAD
 // include "alert.php";
 
 if($login){
@@ -154,14 +147,14 @@ if($showAlert){
       </button>
       </div> ';
 }
-=======
-include "alert.php";
->>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 ?>
   <div class="container my-4">
-
-
-    <table class="table" id="myTable">
+  <div class="search">
+  <label><b>  Search Date : </b></label>
+    <input id="myInput" type="text" placeholder="Search..">
+  </div>
+<br>  
+    <table class="table">
       <thead>
         <tr>
           <th>S.No</th>
@@ -169,10 +162,11 @@ include "alert.php";
           <th>pagename</th>
           <th>lineno</th>
           <th>query</th>
+          <th>comment</th>
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody  id="myTable">
         <?php 
           $sql = "SELECT * FROM `query`";
           $result = mysqli_query($conn, $sql);
@@ -185,6 +179,7 @@ include "alert.php";
             <td>". $row['pagename'] . "</td>
             <td>". $row['lineno'] . "</td>
             <td>". $row['query'] . "</td>
+            <td>". $row['comment'] . "</td>
             <td> <button class='edit btn btn-sm btn-primary' id=".$row['sno'].">Edit</button> <button class='delete btn btn-sm btn-primary' id=d".$row['sno'].">Delete</button>  </td>
           </tr>";
         } 
@@ -193,6 +188,7 @@ include "alert.php";
 
       </tbody>
     </table>
+    
   </div>
   <hr>
   <!-- Optional JavaScript -->
@@ -207,12 +203,18 @@ include "alert.php";
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
   <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  
+  
   <script>
-    // $(document).ready(function () {
-    //   $('#myTable').DataTable();
-
-    // });
-  </script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
   <script>
     edits = document.getElementsByClassName('edit');
     Array.from(edits).forEach((element) => {
@@ -223,11 +225,13 @@ include "alert.php";
         pagename1 = tr.getElementsByTagName("td")[1].innerText;
         lineno1 = tr.getElementsByTagName("td")[2].innerText;
         query1 = tr.getElementsByTagName("td")[3].innerText;
-        console.log(date1,pagename1,lineno1,query1);
+        comment1 = tr.getElementsByTagName("td")[4].innerText;
+        console.log(date1,pagename1,lineno1,query1,comment1);
         date.value = date1;
         pagename.value = pagename1;
         lineno.value = lineno1;
         query.value = query1;
+        comment = comment1;
         snoEdit.value = e.target.id;
         console.log(e.target.id)
         $('#editModal').modal('toggle');

@@ -2,131 +2,8 @@
 <html lang="en">
 <head>
     <title>ADMIN</title>
-<<<<<<< HEAD
     <link rel="stylesheet" href="/project/style/admin_home.css">
 
-=======
-<style>
-    *{
-    margin: 0;
-    padding: 0;
-}
-
-.main{
-    width: 100%;
-    /* background: linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%), url(code\ of\ war.jpg); */
-    background-image: url("bgimg.jpg");
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
-}
-
-.navbar{
-    width: 1200px;
-    height: 75px;
-    margin: auto;
-}
-
-
-.logo{
-    color: rgb(245, 245, 245);
-    font-size: 35px;
-    font-family: Arial;
-    padding-left: 20px;
-    float: left;
-    padding-top: 10px;
-    margin-top: 5px
-}
-
-.menu{
-    width: 400px;
-    float: left;
-    height: 20px;
-}
-
-ul{
-    float: left;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-ul li{
-    list-style: none;
-    margin-left: 62px;
-    margin-top: 27px;
-    font-size: 14px;
-}
-
-ul li a{
-    text-decoration: none;
-    color: #fff;
-    font-family: Arial;
-    font-weight: bold;
-    transition: 0.4s ease-in-out;
-}
-
-ul li a:hover{
-    color: #ff7200;
-}
-
-
-.content{
-    width: 1200px;
-    height: auto;
-    margin: auto;
-    color: #fff;
-    position: relative;
-}
-
-.content .par{
-    padding-left: 20px;
-    padding-bottom: 25px;
-    font-family: Arial;
-    letter-spacing: 1.2px;
-    line-height: 30px;
-}
-
-.content h1{
-    font-family: 'Times New Roman';
-    font-size: 50px;
-    padding-left: 20px;
-    margin-top: 9%;
-    letter-spacing: 2px;
-}
-
-.content .cn{
-    width: 160px;
-    height: 40px;
-    background: #fff;
-    border: none;
-    margin-bottom: 10px;
-    margin-left: 20px;
-    font-size: 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .4s ease;
-    
-}
-
-.content .cn a{
-    text-decoration: none;
-    color: #000;
-    transition: .3s ease;
-}
-
-.cn:hover{
-    background-color: #fff;
-}
-
-.content span{
-    color: #fff;
-    font-size: 65px
-}
-
-</style>
-</style>
->>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
 </head>
 <body>
 
@@ -141,13 +18,8 @@ ul li a:hover{
                     <li><a href="admin_home.php">HOME</a></li>
                     <li><a href="signup_user.php">NEW USER SIGNUP</a></li>
                     <li><a href="admin_dashbord.php">DASHBORD</a></li>
-<<<<<<< HEAD
                     <li><a href="admin_profile.php">Profile </a></li>
                     <li><a href="student_profile.php">Student Details</a></li>
-=======
-                    <li><a href="admin_profile.php">Profile Update</a></li>
-                    <li><a href="profile.php">Student Details</a></li>
->>>>>>> 6bc97fc4eff9480bb74f24c79203e74866448bbb
                     <li><a href="admin_logout.php">LOGOUT</a></li>
 
 
